@@ -18,3 +18,12 @@ var kidsWithCandies = function (candies, extraCandies) {
 };
 
 console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));
+
+// bonus
+/*
+Declare a function 'isMonotonicArr' that takes in an array of numbers as its single argument. This function should return a boolean value indicating whether the input array is either in ascending or descending order, meaning each subsequent element is either greater than or equal to (in the case of ascending order) or less than or equal to (in the case of descending order) the preceding element.
+
+console.log(isMonotonicArr([333, 4444, 55555, 666666]));	// true
+console.log(isMonotonicArr([9, 5, 5, 2, 1, 1]));	        // true
+console.log(isMonotonicArr([0, 1, 0, 1, 0, 1, 0, 1, 0]));	// false
+*/
