@@ -1,19 +1,48 @@
+### Leetcode
+
+# problem (Kids With the Greatest Number of Candies
+
+)
+There are n kids with candies. You are given an integer array candies, where each candies[i] represents the number of candies the ith kid has, and an integer extraCandies, denoting the number of extra candies that you have.
+
+Return a boolean array result of length n, where result[i] is true if, after giving the ith kid all the extraCandies, they will have the greatest number of candies among all the kids, or false otherwise.
+
+Note that multiple kids can have the greatest number of candies.
+
+Example 1:
+
+Input: candies = [2,3,5,1,3], extraCandies = 3
+Output: [true,true,true,false,true]
+Explanation: If you give all extraCandies to:
+
+- Kid 1, they will have 2 + 3 = 5 candies, which is the greatest among the kids.
+- Kid 2, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+- Kid 3, they will have 5 + 3 = 8 candies, which is the greatest among the kids.
+- Kid 4, they will have 1 + 3 = 4 candies, which is not the greatest among the kids.
+- Kid 5, they will have 3 + 3 = 6 candies, which is the greatest among the kids.
+  Example 2:
+
+Input: candies = [4,2,1,1,2], extraCandies = 1
+Output: [true,false,false,false,false]
+Explanation: There is only 1 extra candy.
+Kid 1 will always have the greatest number of candies, even if a different kid is given the extra candy.
+
 # Intuition
 
 <!-- Describe your first thoughts on how to solve this problem. -->
 
 # Approach
 
-Recurtion
-
 <!-- Describe your approach to solving the problem. -->
 
 # steps
 
-1. check if str1 + str2 !== str2 + str1 then we return an emty string
-2. check if str1 == str2 then we return str1
-3. check if the length of str1 > length of str2 then we recurcively call our function passing a substring of str1 at a length of str2 and str2 as params
-4. wlse we return recurcively our function passing a substring of str2 at length of str1 and str1 as params
+1. declare a variable say resultsArray = []
+2. iterate over the candies array
+3. at each index add extraCadies to existing candies
+4. check if the result after added is >= max candies
+5. if yes we push true to the result array else push false
+6. lastly we return resultsArray
 
 # Complexity
 
@@ -25,17 +54,19 @@ Recurtion
 
 # Code
 
-```var gcdOfStrings = function (str1, str2) {
-  if (str1 + str2 !== str2 + str1) {
-    return "";
-  } else if (str1 == str2) {
-    return str1;
-  } else if (str1.length > str2.length) {
-    return gcdOfStrings(str1.substring(str2.length), str2);
-  } else {
-    return gcdOfStrings(str2.substring(str1.length), str1);
-  }
+```js
+var kidsWithCandies = function (candies, extraCandies) {
+  // ===> solutions <===
+
+  let resultsArray = [];
+  let max = Math.max(...candies);
+  candies.forEach((i) => {
+    if (i + extraCandies >= max) {
+      resultsArray.push(true);
+    } else resultsArray.push(false);
+  });
+  return resultsArray;
 };
 
-console.log(gcdOfStrings("ABABAB", "ABAB"));
+console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));
 ```
