@@ -1,29 +1,50 @@
-var kidsWithCandies = function (candies, extraCandies) {
-  // declare a variable say resultsArray = []
-  // iterate over the candies array
-  // at each index add extraCadies to existing candies
-  // check if the result after added is >= max candies
-  // if yes we push true to the result array else push false
-  // lastly we return resultsArray
+// steps
+// define a variable as results and set it to true and a counter and 0
+// check if n = 0 set results to true and return
+// check i flowerbed lengh is == 1 and flowerbed at the firsts index = 0 return true else return false
+// loop over flowerbed check is flowerbeb[i] = 0 and i = 0 check flowerbed[i+1] == 0  increment counter by one then set flowerbed[i] == 1
+// else if flowerbed at the last index = i and flowerbed[i-1] = 0 then coounter + 1 flowerbed[1] = 1
+// if flowerbed[i-1] == 0 and flowerbed[i - 1] == 0 counter += 1 flowerbed[i] = 1
 
-  // ===> solutions <===
-  let resultsArray = [];
-  let max = Math.max(...candies);
-  candies.forEach((i) => {
-    if (i + extraCandies >= max) {
-      resultsArray.push(true);
-    } else resultsArray.push(false);
-  });
-  return resultsArray;
+// if counter >= n return true else return false
+
+/**
+ * @param {number[]} flowerbed
+ * @param {number} n
+ * @return {boolean}
+ */
+
+var canPlaceFlowers = function (flowerbed, n) {
+  let result = true;
+  let counter = 0;
+  if (n == 0) {
+    return (result = true);
+  }
+  if (flowerbed.length == 1) {
+    result = flowerbed[0] == 0 ? true : false;
+  } else {
+    for (let i = 0; i <= flowerbed.length; i++) {
+      if (flowerbed[i] == 0) {
+        if (i == 0) {
+          if (flowerbed[i + 1] == 0) {
+            counter += 1;
+            flowerbed[i] = 1;
+          }
+        } else {
+          if (flowerbed.length - 1 == i && flowerbed[i - 1] == 0) {
+            counter += 1;
+            flowerbed[i] = 1;
+          }
+          if (flowerbed[i + 1] == 0 && flowerbed[i - 1] == 0) {
+            counter += 1;
+            flowerbed[i] = 1;
+          }
+        }
+      }
+    }
+    result = counter >= n ? true : false;
+  }
+  return result;
 };
 
-console.log(kidsWithCandies([2, 3, 5, 1, 3], 3));
-
-// bonus
-/*
-Declare a function 'isMonotonicArr' that takes in an array of numbers as its single argument. This function should return a boolean value indicating whether the input array is either in ascending or descending order, meaning each subsequent element is either greater than or equal to (in the case of ascending order) or less than or equal to (in the case of descending order) the preceding element.
-
-console.log(isMonotonicArr([333, 4444, 55555, 666666]));	// true
-console.log(isMonotonicArr([9, 5, 5, 2, 1, 1]));	        // true
-console.log(isMonotonicArr([0, 1, 0, 1, 0, 1, 0, 1, 0]));	// false
-*/
+console.log(canPlaceFlowers([1, 0, 0, 0, 0, 0, 1], 2));
