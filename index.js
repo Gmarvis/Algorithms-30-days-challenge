@@ -1,50 +1,35 @@
-// steps
-// define a variable as results and set it to true and a counter and 0
-// check if n = 0 set results to true and return
-// check i flowerbed lengh is == 1 and flowerbed at the firsts index = 0 return true else return false
-// loop over flowerbed check is flowerbeb[i] = 0 and i = 0 check flowerbed[i+1] == 0  increment counter by one then set flowerbed[i] == 1
-// else if flowerbed at the last index = i and flowerbed[i-1] = 0 then coounter + 1 flowerbed[1] = 1
-// if flowerbed[i-1] == 0 and flowerbed[i - 1] == 0 counter += 1 flowerbed[i] = 1
+var reverseVowels = function (s) {
+  // define a varable for all vawel sound in the array to an empty array
+  // difine an array of valwels
+  // loop through the string array for each letter in the array we do the folloe checks :-4
+  // ---> check if the vawels array includes that string if yes we push to vawelsInSting array
+  // revease the vawelsInString array
+  // loop again over the string array for every vawel sound in the string, we replace with the first letter in the vawelsInStrings array and the vawel from the array
+  // lastly we return revered string
 
-// if counter >= n return true else return false
+  let vawels = ["a", "e", "i", "o", "u"];
+  let vawelsInString = [];
+  let stringArray = s.split("");
 
-/**
- * @param {number[]} flowerbed
- * @param {number} n
- * @return {boolean}
- */
-
-var canPlaceFlowers = function (flowerbed, n) {
-  let result = true;
-  let counter = 0;
-  if (n == 0) {
-    return (result = true);
-  }
-  if (flowerbed.length == 1) {
-    result = flowerbed[0] == 0 ? true : false;
-  } else {
-    for (let i = 0; i <= flowerbed.length; i++) {
-      if (flowerbed[i] == 0) {
-        if (i == 0) {
-          if (flowerbed[i + 1] == 0) {
-            counter += 1;
-            flowerbed[i] = 1;
-          }
-        } else {
-          if (flowerbed.length - 1 == i && flowerbed[i - 1] == 0) {
-            counter += 1;
-            flowerbed[i] = 1;
-          }
-          if (flowerbed[i + 1] == 0 && flowerbed[i - 1] == 0) {
-            counter += 1;
-            flowerbed[i] = 1;
-          }
-        }
-      }
+  stringArray.forEach((letter) => {
+    if (vawels.includes(letter.toLowerCase())) {
+      vawelsInString.push(letter);
     }
-    result = counter >= n ? true : false;
+  });
+  let reversedVawels = vawelsInString.reverse();
+  let count = 0;
+
+  for (let i = 0; i <= stringArray.length; i++) {
+    if (reversedVawels.includes(stringArray[i])) {
+      stringArray[i] = reversedVawels[count];
+      count += 1;
+    }
   }
-  return result;
+
+  return stringArray.join("");
 };
 
-console.log(canPlaceFlowers([1, 0, 0, 0, 0, 0, 1], 2));
+console.log(reverseVowels("aA"));
+console.log(reverseVowels("hello"));
+console.log(reverseVowels("metter"));
+console.log(reverseVowels("mattAr"));
