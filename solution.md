@@ -1,21 +1,19 @@
 ### Leetcode
 
-# problem (Reverse Vowels of a String
+# problem (Reverse Words in a String)
 
-)
+Given an input string s, reverse the order of the words.
 
-Given a string s, reverse only all the vowels in the string and return it.
+A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
 
-The vowels are 'a', 'e', 'i', 'o', and 'u', and they can appear in both lower and upper cases, more than once.
+Return a string of the words in reverse order concatenated by a single space.
+
+Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
 
 Example 1:
 
-Input: s = "hello"
-Output: "holle"
-Example 2:
-
-Input: s = "leetcode"
-Output: "leotcede"
+Input: s = "the sky is blue"
+Output: "blue is sky the"
 
 # Intuition
 
@@ -27,13 +25,12 @@ Output: "leotcede"
 
 # steps
 
-1. define a varable for all vawel sound in the array to an empty array
-2. difine an array of valwels
-3. loop through the string array for each letter in the array we do the folloe checks :-4
-4. ---> check if the vawels array includes that string if yes we push to vawelsInSting array
-5. revease the vawelsInString array
-6. loop again over the string array for every vawel sound in the string, we replace with the first letter in the vawelsInStrings array and the vawel from the array
-7. lastly we return revered string
+1. fist trim the the string to remove any leading spaces
+2. difine as stringArray and set it to an empty array
+3. split the trimed string
+4. loop over the splited string an push evey wore to the stringArray
+5. reverse the string array
+6. join and return the reversed string array
 
 # Complexity
 
