@@ -1,18 +1,31 @@
-let s = " a good   example ";
-let b = "  world hello  ";
-let c = "  hello world  ";
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
 
-var reverseWords = function (s) {
-  s.trim();
-  stringArray = [];
-  s.split(" ").forEach((elem) => {
-    if (elem !== "") {
-      stringArray.push(elem);
+var productExceptSelf = function (nums) {
+    const n = nums.length;
+    const answer = [];
+
+    const left = new Array(n).fill(1);
+    const right = new Array(n).fill(1);
+
+    // first calculate the produccts of all elements to the left
+
+    for (let i = 1; i < n; i++) {
+        left[i] = left[i - 1] * nums[i - 1];
     }
-  });
-  return stringArray.reverse().join(" ");
+
+    // secondly calculate the products of all elements to the right
+
+    for (let i = n - 2; i >= 0; i--) {
+        right[i] = right[i + 1] * nums[i + 1];
+    }
+
+    for (let i = 0; i < n; i++) {
+        answer[i] = left[i] * right[i];
+    }
+    return answer;
 };
 
-console.log(reverseWords(s));
-console.log(reverseWords(b));
-console.log(reverseWords(c));
+console.log(productExceptSelf([1, 2, 3, 4, 5]));
