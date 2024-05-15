@@ -1,17 +1,25 @@
-const increasingTriplet = (nums) => {
-    let a = Infinity;
-    let b = Infinity;
-    let c = Infinity;
-
-    for (let i = 0; i < nums.length; i++) {
-        if (a >= nums[i]) a = nums[i];
-        else if (b >= nums[i]) b = nums[i];
-        else if (c >= nums[i]) return true;
+var compress = function (chars) {
+    let i = 0;
+    let j = 0;
+    while (j < chars.length) {
+        let count = 0;
+        let curr = chars[j];
+        while (j < chars.length && chars[j] === curr) {
+            j++;
+            count++;
+        }
+        chars[i++] = curr;
+        if (count > 1) {
+            for (let digit of count.toString()) {
+                chars[i++] = digit;
+            }
+        }
     }
-    return false;
+    return i;
 };
 
-console.log(increasingTriplet([1, 2, 3, 4, 5])); // true
-console.log(increasingTriplet([5, 4, 3, 2, 1])); //false
-console.log(increasingTriplet([2, 1, 5, 0, 4, 6])); // true
-console.log(increasingTriplet([20, 100, 10, 12, 5, 13])); // true
+console.log(compress(["a", "a", "b", "b", "c", "c", "c"])); //["a","2","b","2","3"]
+console.log(compress(["a"])); // ["a"]
+console.log(
+    compress(["a", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"])
+); // ["a", "b", "1","2"]

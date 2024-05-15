@@ -1,24 +1,18 @@
 ### Leetcode
 
-# problem (Increasing Triplet Subsequence)
+# problem (String Compression)
 
-Given an integer array nums, return true if there exists a triple of indices (i, j, k) such that i < j < k and nums[i] < nums[j] < nums[k]. If no such indices exists, return false.
+Given an array of characters chars, compress it using the following algorithm:
 
-Example 1:
+Begin with an empty string s. For each group of consecutive repeating characters in chars:
 
-Input: nums = [1,2,3,4,5]
-Output: true
-Explanation: Any triplet where i < j < k is valid.
-Example 2:
+If the group's length is 1, append the character to s.
+Otherwise, append the character followed by the group's length.
+The compressed string s should not be returned separately, but instead, be stored in the input character array chars. Note that group lengths that are 10 or longer will be split into multiple characters in chars.
 
-Input: nums = [5,4,3,2,1]
-Output: false
-Explanation: No triplet exists.
-Example 3:
+After you are done modifying the input array, return the new length of the array.
 
-Input: nums = [2,1,5,0,4,6]
-Output: true
-Explanation: The triplet (3, 4, 5) is valid because nums[3] == 0 < nums[4] == 4 < nums[5] == 6.
+You must write an algorithm that uses only constant extra space.
 
 # Intuition
 
@@ -30,7 +24,18 @@ Explanation: The triplet (3, 4, 5) is valid because nums[3] == 0 < nums[4] == 4 
 
 # steps
 
-1. loop over the array keeping track of elements at each index
+Initialize an empty string res to store the compressed string.
+Initialize a character c to store the current character being processed.
+Initialize an integer count to store the count of consecutive repeating characters.
+Iterate through the input array chars.
+For each character:
+If c is empty, update c to the current character, increment count by 1, and append the character to res.
+If the current character is equal to c, increment count by 1.
+If the current character is different from c, check if count is greater than 1. If yes, append count to res.
+Reset c to empty and reset count to 0.
+After the loop, if count is greater than 1, append it to res.
+Copy characters from res back to the input array chars.
+Return the length of the compressed string res.
 
 # Complexity
 
@@ -43,21 +48,29 @@ Explanation: The triplet (3, 4, 5) is valid because nums[3] == 0 < nums[4] == 4 
 # Code
 
 ```js
-const increasingTriplet = (nums) => {
-    let a = Infinity;
-    let b = Infinity;
-    let c = Infinity;
-
-    for (let i = 0; i < nums.length; i++) {
-        if (a >= nums[i]) a = nums[i];
-        else if (b >= nums[i]) b = nums[i];
-        else if (c >= nums[i]) return true;
+var compress = function (chars) {
+    let i = 0;
+    let j = 0;
+    while (j < chars.length) {
+        let count = 0;
+        let curr = chars[j];
+        while (j < chars.length && chars[j] === curr) {
+            j++;
+            count++;
+        }
+        chars[i++] = curr;
+        if (count > 1) {
+            for (let digit of count.toString()) {
+                chars[i++] = digit;
+            }
+        }
     }
-    return false;
+    return i;
 };
 
-console.log(increasingTriplet([1, 2, 3, 4, 5])); // true
-console.log(increasingTriplet([5, 4, 3, 2, 1])); //false
-console.log(increasingTriplet([2, 1, 5, 0, 4, 6])); // true
-console.log(increasingTriplet([20, 100, 10, 12, 5, 13])); // true
+console.log(compress(["a", "a", "b", "b", "c", "c", "c"])); //["a","2","b","2","3"]
+console.log(compress(["a"])); // ["a"]
+console.log(
+    compress(["a", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"])
+); // ["a", "b", "1","2"]
 ```
