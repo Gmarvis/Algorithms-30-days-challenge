@@ -1,25 +1,23 @@
-var compress = function (chars) {
-    let i = 0;
-    let j = 0;
-    while (j < chars.length) {
-        let count = 0;
-        let curr = chars[j];
-        while (j < chars.length && chars[j] === curr) {
-            j++;
-            count++;
-        }
-        chars[i++] = curr;
-        if (count > 1) {
-            for (let digit of count.toString()) {
-                chars[i++] = digit;
-            }
+// we first define and pointer to keep track of the position where we are at
+// loop through the array
+// check if the element is not equal zero then set nums at the index of pointer to element. then incease pointer by 1
+// lastly we loop over the remaining array starting at index to the length of the array replacing each element withh zero
+let nums = [0, 1, 0, 3, 12];
+var moveZeroes = function (nums) {
+    let index = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] !== 0) {
+            nums[index] = nums[i];
+            index++;
         }
     }
-    return i;
+
+    for (let i = index; i < nums.length; i++) {
+        nums[i] = 0;
+    }
+
+    return nums;
 };
 
-console.log(compress(["a", "a", "b", "b", "c", "c", "c"])); //["a","2","b","2","3"]
-console.log(compress(["a"])); // ["a"]
-console.log(
-    compress(["a", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"])
-); // ["a", "b", "1","2"]
+console.log(moveZeroes(nums));
