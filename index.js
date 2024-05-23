@@ -1,5 +1,6 @@
 // we first define and pointer to keep track of the position where we are at
 // loop through the array
+
 // check if the element is not equal zero then set nums at the index of pointer to element. then incease pointer by 1
 // lastly we loop over the remaining array starting at index to the length of the array replacing each element withh zero
 let nums = [0, 1, 0, 3, 12];
