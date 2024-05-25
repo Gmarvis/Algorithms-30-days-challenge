@@ -1,21 +1,21 @@
 ### Leetcode
 
-# problem (Move Zeroes)
+# problem (Is Subsequence)
 
-Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
-
-Note that you must do this in-place without making a copy of the array.
+A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
 
 Example 1:
 
-Input: nums = [0,1,0,3,12]
-Output: [1,3,12,0,0]
+Input: s = "abc", t = "ahbgdc"
+Output: true
 Example 2:
 
-Input: nums = [0]
-Output: [0]
+Input: s = "axc", t = "ahbgdc"
+Output: false
 
 # Intuition
+
+### 2pointer
 
 <!-- Describe your first thoughts on how to solve this problem. -->
 
@@ -25,10 +25,7 @@ Output: [0]
 
 # steps
 
-1. we first define and pointer to keep track of the position where we are at
-2. loop through the array
-3. check if the element is not equal zero then set nums at the index of pointer to element. then incease pointer by 1
-4. lastly we loop over the remaining array starting at index to the length of the array replacing each element withh zero
+see solution for steps
 
 # Complexity
 
@@ -41,20 +38,23 @@ Output: [0]
 # Code
 
 ```js
-var moveZeroes = function (nums) {
-    let index = 0;
+var isSubsequence = function (s, t) {
+    // define two pointers to keep track of the position of each character in both strings
+    let sp = 0;
+    let tp = 0;
 
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[i] !== 0) {
-            nums[index] = nums[i];
-            index++;
+    // loop over but strings with a while loog
+
+    while (sp < s.length && tp < t.length) {
+        //check if s[sp] === to t[tp]
+        // if true we increment sp
+        // always increment tp
+        if (s[sp] === t[tp]) {
+            sp++;
         }
+        tp++;
     }
-
-    for (let i = index; i < nums.length; i++) {
-        nums[i] = 0;
-    }
-
-    return nums;
+    // return the results of sp equal to the length of s
+    return sp === s.length;
 };
 ```
